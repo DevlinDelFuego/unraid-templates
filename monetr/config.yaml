@@ -1,6 +1,7 @@
 environment: ""
 allowSignUp: true
- 
+
+# Email uses a no-reply@domain.com address.
 email:
   enabled: false
   domain: "" # Does not need to match your `externalUrl` domain.
