@@ -58,8 +58,8 @@ server:
   # YOU NEED TO CONFIGURE THIS IF YOU ARE USING SOMETHING OTHER THAN LOCALHOST TO ACCESS MONETR
   # This config determines what URL monetr sets cookies on as well as what URL is used for links
   # sent via email. Misconfiguring this URL may result in not being able to login to monetr.
-  #listenPort: 4000
-  #listenAddress: 0.0.0.0
+  listenPort: 4000
+  listenAddress: 0.0.0.0
   #externalUrl: <http://localhost:4000>
   #statsPort: 9000
   #uiCacheHours: 336 # 14 days in hours, determines cache headers for UI assets.
