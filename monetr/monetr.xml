@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>monetr</Name>
+  <Repository>monetr/monetr</Repository>
+  <Registry>https://hub.docker.com/r/monetr/monetr/</Registry>
+  <Network>bridge</Network>
+  <MyIP/>
+  <Shell>sh</Shell>
+  <Privileged>false</Privileged>
+  <Support>https://hub.docker.com/r/monetr/monetr/</Support>
+  <Project>https://github.com/monetr/monetr</Project>
+  <Overview>monetr is a budgeting application that aims to make it easier for people to budget around recurring expenses. While making it absolutely clear how much you have left over to budget or use for other unplanned spending. It is based off of the now defunct Simple. It is also completely free to self-host.</Overview>
+  <Category>Productivity:</Category>
+  <WebUI>http://[IP]:[PORT:4000]/</WebUI>
+  <TemplateURL/>
+  <Icon>https://raw.githubusercontent.com/DevlinDelFuego/unraid-templates/refs/heads/main/monetr/monetr.png</Icon>
+  <ExtraParams/>
+  <PostArgs>--config /etc/monetr/config.yaml serve --migrate --generate-certificates</PostArgs>
+  <CPUset/>
+  <DateInstalled>1763616879</DateInstalled>
+  <DonateText/>
+  <DonateLink/>
+  <Requires/>
+  <Config Name="Data" Target="/etc/monetr" Default="/mnt/user/appdata/monetr" Mode="rw" Description="" Type="Path" Display="always" Required="false" Mask="false">/mnt/user/appdata/monetr</Config>
+  <Config Name="Port" Target="4000" Default="4000" Mode="tcp" Description="" Type="Port" Display="always" Required="false" Mask="false">4000</Config>
+  <TailscaleStateDir/>
+</Container>
