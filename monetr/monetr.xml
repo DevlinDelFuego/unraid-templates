@@ -20,7 +20,6 @@ https://github.com/DevlinDelFuego/unraid-templates/blob/main/monetr/config.yaml<
   <ExtraParams/>
   <PostArgs>--config /etc/monetr/config.yaml serve --migrate --generate-certificates</PostArgs>
   <CPUset/>
-  <DateInstalled/>
   <DonateText/>
   <DonateLink/>
   <Requires/>
@@ -28,4 +27,5 @@ https://github.com/DevlinDelFuego/unraid-templates/blob/main/monetr/config.yaml<
   <Config Name="Port" Target="4000" Default="4000" Mode="tcp" Description="" Type="Port" Display="always" Required="false" Mask="false">4000</Config>
   <TailscaleStateDir/>
 </Container>
+
 
