@@ -3,7 +3,7 @@
   <Name>yourls</Name>
   <Repository>yourls</Repository>
   <Registry>https://hub.docker.com/_/yourls/</Registry>
-  <Network>proxynet</Network>
+  <Network>bridge</Network>
   <MyIP/>
   <Shell>sh</Shell>
   <Privileged>false</Privileged>
