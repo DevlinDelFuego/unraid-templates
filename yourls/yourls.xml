@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>yourls</Name>
+  <Repository>yourls</Repository>
+  <Registry>https://hub.docker.com/_/yourls/</Registry>
+  <Network>proxynet</Network>
+  <MyIP/>
+  <Shell>sh</Shell>
+  <Privileged>false</Privileged>
+  <Support>https://hub.docker.com/_/yourls/</Support>
+  <Project/>
+  <Overview>YOURLS is a set of PHP scripts that will allow you to run Your Own URL Shortener.</Overview>
+  <Category>Cloud: Tools:Utilities Network:Web Network:Other</Category>
+  <WebUI>http://[IP]:[PORT:8080]/admin</WebUI>
+  <TemplateURL>https://raw.githubusercontent.com/RazorSiM/docker-templates/master/yourls.xml</TemplateURL>
+  <Icon>https://github.com/YOURLS/YOURLS/raw/master/images/yourls-logo.png</Icon>
+  <ExtraParams/>
+  <PostArgs/>
+  <CPUset/>
+  <DonateText/>
+  <DonateLink/>
+  <Requires/>
+  <Config Name="Container Port" Target="8080" Default="" Mode="tcp" Description="" Type="Port" Display="always" Required="true" Mask="false">8092</Config>
+  <Config Name="MariaDB Host and Port" Target="YOURLS_DB_HOST" Default="mariadbhost:3306" Mode="" Description="" Type="Variable" Display="always" Required="true" Mask="false"/>
+  <Config Name="MariaDB User" Target="YOURLS_DB_USER" Default="" Mode="" Description="" Type="Variable" Display="always" Required="false" Mask="false">yourls</Config>
+  <Config Name="MariaDB Password" Target="YOURLS_DB_PASS" Default="" Mode="" Description="" Type="Variable" Display="always" Required="true" Mask="true"/>
+  <Config Name="url" Target="YOURLS_SITE" Default="http://yourdomain.com" Mode="" Description="Use a reverse proxy to point to the container host" Type="Variable" Display="always" Required="true" Mask="false">http://yourdomain.com</Config>
+  <Config Name="MariaDB Database Name" Target="YOURLS_DB_NAME" Default="yourls" Mode="" Description="yourls database name. default is 'yourls'" Type="Variable" Display="always" Required="true" Mask="false">yourls</Config>
+  <Config Name="YOURLS_HOURS_OFFSET" Target="YOURLS_HOURS_OFFSET" Default="0" Mode="" Description="set your timezone ( GMT )" Type="Variable" Display="always" Required="true" Mask="false">0</Config>
+  <Config Name="YOURLS_PRIVATE" Target="YOURLS_PRIVATE" Default="true" Mode="" Description="false will set yourls to public. Reccomended value is true ( to be private )" Type="Variable" Display="always" Required="true" Mask="false">true</Config>
+  <Config Name="YOURLS_USER" Target="YOURLS_USER" Default="admin" Mode="" Description="Yourls admin interface username" Type="Variable" Display="always" Required="true" Mask="false"/>
+  <Config Name="YOURLS_PASS" Target="YOURLS_PASS" Default="strongpass" Mode="" Description="Yourls admin interface password" Type="Variable" Display="always" Required="true" Mask="true"/>
+</Container>
