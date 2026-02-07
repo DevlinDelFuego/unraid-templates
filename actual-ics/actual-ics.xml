@@ -14,7 +14,7 @@
   <Category>Productivity:</Category>
   <WebUI>http://[IP]:[PORT:3000]/</WebUI>
   <TemplateURL/>
-  <Icon/>
+  <Icon>https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/actual-budget.png</Icon>
   <ExtraParams/>
   <PostArgs/>
   <CPUset/>
