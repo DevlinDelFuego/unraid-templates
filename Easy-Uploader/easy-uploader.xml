@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <Container version="2">
   <Name>EasyUploader</Name>
-  <Repository>DevlinDelFuego/easy-uploader:latest</Repository>
+  <Repository>devlindelfuego/easy-uploader:latest</Repository>
   <Registry>https://hub.docker.com/r/devlindelfuego/easy-uploader</Registry>
   <Network>bridge</Network>
   <Privileged>false</Privileged>
