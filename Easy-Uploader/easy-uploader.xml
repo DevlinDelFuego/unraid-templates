@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>EasyUploader</Name>
+  <Repository>DevlinDelFuego/easy-uploader:latest</Repository>
+  <Registry>https://registry.hub.docker.com</Registry>
+  <Network>bridge</Network>
+  <Privileged>false</Privileged>
+  <Support>https://github.com/DevlinDelFuego/Easy-Uploader/issues</Support>
+  <Project>https://github.com/DevlinDelFuego/Easy-Uploader</Project>
+  <Overview>
+    Easy Uploader is a self-hosted file and photo sharing app. Create named share links protected by passwords. Guests visit the link, enter the password, and upload files or photos directly to your server. Manage all shares and view every upload from the admin panel.
+  </Overview>
+  <Category>Tools: MediaApp:Photos</Category>
+  <WebUI>http://[IP]:[PORT:3000]/admin</WebUI>
+  <TemplateURL>https://raw.githubusercontent.com/DevlinDelFuego/Easy-Uploader/main/easy-uploader.xml</TemplateURL>
+  <Icon>https://raw.githubusercontent.com/DevlinDelFuego/Easy-Uploader/main/icon.png</Icon>
+  <ExtraParams></ExtraParams>
+  <DonateText></DonateText>
+  <DonateLink></DonateLink>
+  <Requires></Requires>
+
+  <Config Name="Web UI Port" Target="3000" Default="3000" Mode="tcp"
+    Description="Port for the Easy Uploader web interface."
+    Type="Port" Display="always" Required="true" Mask="false">3000</Config>
+
+  <Config Name="Uploads Path" Target="/app/uploads" Default="/mnt/user/appdata/easy-uploader/uploads" Mode="rw"
+    Description="Where uploaded files are stored on your server. Map this to the share or folder where you want files to land."
+    Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/easy-uploader/uploads</Config>
+
+  <Config Name="Data Path" Target="/app/data" Default="/mnt/user/appdata/easy-uploader/data" Mode="rw"
+    Description="Where the database file is stored. Keep this on persistent storage."
+    Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/easy-uploader/data</Config>
+
+  <Config Name="Admin Username" Target="ADMIN_USERNAME" Default="admin" Mode=""
+    Description="Username for the admin panel."
+    Type="Variable" Display="always" Required="true" Mask="false">admin</Config>
+
+  <Config Name="Admin Password" Target="ADMIN_PASSWORD" Default="" Mode=""
+    Description="Password for the admin panel. Required."
+    Type="Variable" Display="always" Required="true" Mask="true"></Config>
+
+  <Config Name="Session Secret" Target="SESSION_SECRET" Default="" Mode=""
+    Description="A long random string used to sign session cookies. Generate one at: https://generate-secret.vercel.app/64"
+    Type="Variable" Display="always" Required="true" Mask="true"></Config>
+
+  <Config Name="Max File Size (MB)" Target="MAX_FILE_SIZE_MB" Default="500" Mode=""
+    Description="Maximum size per uploaded file, in megabytes."
+    Type="Variable" Display="advanced" Required="false" Mask="false">500</Config>
+
+  <Config Name="PUID" Target="PUID" Default="99" Mode=""
+    Description="User ID the container runs as. Use 99 for nobody (Unraid default)."
+    Type="Variable" Display="advanced" Required="false" Mask="false">99</Config>
+
+  <Config Name="PGID" Target="PGID" Default="100" Mode=""
+    Description="Group ID the container runs as. Use 100 for users (Unraid default)."
+    Type="Variable" Display="advanced" Required="false" Mask="false">100</Config>
+
+  <Config Name="NODE_ENV" Target="NODE_ENV" Default="production" Mode=""
+    Description="Node.js environment. Keep as production."
+    Type="Variable" Display="advanced" Required="false" Mask="false">production</Config>
+</Container>
