@@ -2,10 +2,10 @@
 <Container version="2">
   <Name>EasyUploader</Name>
   <Repository>DevlinDelFuego/easy-uploader:latest</Repository>
-  <Registry>https://registry.hub.docker.com</Registry>
+  <Registry>https://hub.docker.com/r/devlindelfuego/easy-uploader</Registry>
   <Network>bridge</Network>
   <Privileged>false</Privileged>
-  <Support>https://github.com/DevlinDelFuego/Easy-Uploader/issues</Support>
+  <Support>https://forums.unraid.net/topic/195220-support-devlindelfuego-all-images-and-files/</Support>
   <Project>https://github.com/DevlinDelFuego/Easy-Uploader</Project>
   <Overview>
     Easy Uploader is a self-hosted file and photo sharing app. Create named share links protected by passwords. Guests visit the link, enter the password, and upload files or photos directly to your server. Manage all shares and view every upload from the admin panel.
