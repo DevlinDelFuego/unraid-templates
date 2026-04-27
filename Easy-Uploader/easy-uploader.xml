@@ -62,4 +62,8 @@
   <Config Name="COOKIE_SECURE" Target="COOKIE_SECURE" Default="false" Mode=""
     Description="Set to true only if you are accessing the app over HTTPS via a reverse proxy. Leave false for plain HTTP."
     Type="Variable" Display="advanced" Required="false" Mask="false">false</Config>
+
+  <Config Name="TRUST_PROXY" Target="TRUST_PROXY" Default="false" Mode=""
+    Description="Set to true only if running behind a reverse proxy (e.g. Nginx Proxy Manager, Swag). Leave false for direct access."
+    Type="Variable" Display="advanced" Required="false" Mask="false">false</Config>
 </Container>
