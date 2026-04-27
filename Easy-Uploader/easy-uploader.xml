@@ -58,4 +58,8 @@
   <Config Name="NODE_ENV" Target="NODE_ENV" Default="production" Mode=""
     Description="Node.js environment. Keep as production."
     Type="Variable" Display="advanced" Required="false" Mask="false">production</Config>
+
+  <Config Name="COOKIE_SECURE" Target="COOKIE_SECURE" Default="false" Mode=""
+    Description="Set to true only if you are accessing the app over HTTPS via a reverse proxy. Leave false for plain HTTP."
+    Type="Variable" Display="advanced" Required="false" Mask="false">false</Config>
 </Container>
