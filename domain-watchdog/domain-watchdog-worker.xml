@@ -21,12 +21,12 @@
   <Config Name="App Secret" Target="APP_SECRET" Default="" Description="Must match the App Secret set in the domain-watchdog container." Type="Variable" Display="always" Required="true" Mask="true"></Config>
   <Config Name="Worker Consumer Name" Target="MESSENGER_CONSUMER_NAME" Default="worker" Description="Internal messenger identifier. Leave as worker." Type="Variable" Display="advanced" Required="true" Mask="false">worker</Config>
 
-  <!-- Database - full DSN -->
+  <!-- Database -->
   <Config Name="Database URL" Target="DATABASE_URL" Default="postgresql://app:password@postgresql:5432/domainwatchdog?serverVersion=16&amp;charset=utf8" Description="Must match the Database URL set in the domain-watchdog container exactly." Type="Variable" Display="always" Required="true" Mask="false">postgresql://app:password@postgresql:5432/domainwatchdog?serverVersion=16&amp;charset=utf8</Config>
 
-  <!-- Redis - full DSNs -->
-  <Config Name="Redis Async DSN" Target="MESSENGER_ASYNC_TRANSPORT_DSN" Default="redis://redis:6379/messages" Description="Must match the domain-watchdog container setting." Type="Variable" Display="always" Required="true" Mask="false">redis://redis:6379/messages</Config>
-  <Config Name="Redis RDAP Low DSN" Target="MESSENGER_RDAP_LOW_TRANSPORT_DSN" Default="redis://redis:6379/messages-rdap-low" Description="Must match the domain-watchdog container setting." Type="Variable" Display="advanced" Required="true" Mask="false">redis://redis:6379/messages-rdap-low</Config>
-  <Config Name="Redis RDAP High DSN" Target="MESSENGER_RDAP_HIGH_TRANSPORT_DSN" Default="redis://redis:6379/messages-rdap-high" Description="Must match the domain-watchdog container setting." Type="Variable" Display="advanced" Required="true" Mask="false">redis://redis:6379/messages-rdap-high</Config>
+  <!-- Redis -->
+  <Config Name="Redis Async DSN" Target="MESSENGER_ASYNC_TRANSPORT_DSN" Default="redis://redis:6379/messages?lazy=1" Description="Must match the domain-watchdog container setting." Type="Variable" Display="always" Required="true" Mask="false">redis://redis:6379/messages?lazy=1</Config>
+  <Config Name="Redis RDAP Low DSN" Target="MESSENGER_RDAP_LOW_TRANSPORT_DSN" Default="redis://redis:6379/messages-rdap-low?lazy=1" Description="Must match the domain-watchdog container setting." Type="Variable" Display="advanced" Required="true" Mask="false">redis://redis:6379/messages-rdap-low?lazy=1</Config>
+  <Config Name="Redis RDAP High DSN" Target="MESSENGER_RDAP_HIGH_TRANSPORT_DSN" Default="redis://redis:6379/messages-rdap-high?lazy=1" Description="Must match the domain-watchdog container setting." Type="Variable" Display="advanced" Required="true" Mask="false">redis://redis:6379/messages-rdap-high?lazy=1</Config>
   <Config Name="Redis Lock DSN" Target="LOCK_DSN" Default="redis://redis:6379" Description="Must match the domain-watchdog container setting." Type="Variable" Display="advanced" Required="true" Mask="false">redis://redis:6379</Config>
 </Container>

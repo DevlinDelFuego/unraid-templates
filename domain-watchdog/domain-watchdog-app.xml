@@ -8,7 +8,7 @@
   <Privileged>false</Privileged>
   <Support>https://github.com/maelgangloff/domain-watchdog/issues</Support>
   <Project>https://github.com/maelgangloff/domain-watchdog</Project>
-  <Overview>Domain Watchdog monitors domain lifecycle via RDAP, sends alerts when domains change status, and can automatically attempt registration when a domain drops.[br][br]Requires an existing PostgreSQL and Redis container on the same Docker network.[br][br]Also deploy the domain-watchdog-worker container from this repo.[br][br]Before starting: create the database in your PostgreSQL container:[br]docker exec -it YOUR_POSTGRES_CONTAINER psql -U YOUR_USER -c "CREATE DATABASE domainwatchdog;"</Overview>
+  <Overview>Domain Watchdog monitors domain names using RDAP, tracks their history, and helps you acquire them when they expire.[br][br]Requires an existing PostgreSQL and Redis container on the same Docker network.[br][br]Also deploy the domain-watchdog-worker container.[br][br]Before starting, create the database:[br]docker exec -it YOUR_POSTGRES_CONTAINER psql -U YOUR_USER -c "CREATE DATABASE domainwatchdog;"</Overview>
   <Category>Network: Tools: Status:</Category>
   <WebUI>http://[IP]:[PORT:80]/</WebUI>
   <Icon>https://raw.githubusercontent.com/maelgangloff/domain-watchdog/master/assets/logo.png</Icon>
@@ -22,24 +22,39 @@
   <!-- Volumes -->
   <Config Name="Caddy Data" Target="/data" Default="/mnt/user/appdata/domain-watchdog/caddy/data" Mode="rw" Description="Internal Caddy state storage." Type="Path" Display="advanced" Required="true" Mask="false">/mnt/user/appdata/domain-watchdog/caddy/data</Config>
   <Config Name="Caddy Config" Target="/config" Default="/mnt/user/appdata/domain-watchdog/caddy/config" Mode="rw" Description="Internal Caddy configuration storage." Type="Path" Display="advanced" Required="true" Mask="false">/mnt/user/appdata/domain-watchdog/caddy/config</Config>
-  <Config Name="Public Content" Target="/app/public/content" Default="/mnt/user/appdata/domain-watchdog/public/content" Mode="rw" Description="User-uploaded public content." Type="Path" Display="advanced" Required="true" Mask="false">/mnt/user/appdata/domain-watchdog/public/content</Config>
+  <Config Name="Public Content" Target="/app/public/content" Default="/mnt/user/appdata/domain-watchdog/public/content" Mode="rw" Description="User-uploaded public content. Create a home.md file here to customize the landing page." Type="Path" Display="advanced" Required="true" Mask="false">/mnt/user/appdata/domain-watchdog/public/content</Config>
 
   <!-- App -->
   <Config Name="App Environment" Target="APP_ENV" Default="prod" Description="Leave as prod." Type="Variable" Display="advanced" Required="true" Mask="false">prod</Config>
-  <Config Name="App Secret" Target="APP_SECRET" Default="" Description="Random secret key. Generate one with: openssl rand -hex 32" Type="Variable" Display="always" Required="true" Mask="true"></Config>
-  <Config Name="Secure Cookies" Target="HTTP_SECURE_COOKIE" Default="true" Description="Set to true if behind a reverse proxy with SSL (recommended). Set to false for plain HTTP direct access." Type="Variable" Display="always" Required="true" Mask="false">true</Config>
+  <Config Name="App Secret" Target="APP_SECRET" Default="" Description="Random secret key. Generate with: openssl rand -hex 32" Type="Variable" Display="always" Required="true" Mask="true"></Config>
+  <Config Name="Secure Cookies" Target="HTTP_SECURE_COOKIE" Default="true" Description="Set to true if behind a reverse proxy with SSL. Set to false for plain HTTP direct access." Type="Variable" Display="always" Required="true" Mask="false">true</Config>
   <Config Name="Server Name" Target="SERVER_NAME" Default=":80" Description="Internal Caddy binding. Leave as :80." Type="Variable" Display="advanced" Required="true" Mask="false">:80</Config>
+  <Config Name="Outgoing IP" Target="OUTGOING_IP" Default="" Description="Your server's outgoing public IP address. Required for some domain connectors/registrars." Type="Variable" Display="always" Required="false" Mask="false"></Config>
 
-  <!-- Database - full DSN -->
+  <!-- Registration -->
+  <Config Name="Enable Registration" Target="REGISTRATION_ENABLED" Default="true" Description="Allow new users to register. Set to false to lock down the instance." Type="Variable" Display="always" Required="false" Mask="false">true</Config>
+  <Config Name="Verify Email on Registration" Target="REGISTRATION_VERIFY_EMAIL" Default="false" Description="Require email verification on signup. Requires a working Mailer DSN." Type="Variable" Display="always" Required="false" Mask="false">false</Config>
+
+  <!-- Database -->
   <Config Name="Database URL" Target="DATABASE_URL" Default="postgresql://app:password@postgresql:5432/domainwatchdog?serverVersion=16&amp;charset=utf8" Description="Full PostgreSQL connection string. Format: postgresql://USER:PASSWORD@CONTAINER_NAME:PORT/DATABASE?serverVersion=VERSION&amp;charset=utf8" Type="Variable" Display="always" Required="true" Mask="false">postgresql://app:password@postgresql:5432/domainwatchdog?serverVersion=16&amp;charset=utf8</Config>
 
-  <!-- Redis - full DSNs -->
-  <Config Name="Redis Async DSN" Target="MESSENGER_ASYNC_TRANSPORT_DSN" Default="redis://redis:6379/messages" Description="Redis connection for async messages. Format: redis://CONTAINER_NAME:PORT/messages" Type="Variable" Display="always" Required="true" Mask="false">redis://redis:6379/messages</Config>
-  <Config Name="Redis RDAP Low DSN" Target="MESSENGER_RDAP_LOW_TRANSPORT_DSN" Default="redis://redis:6379/messages-rdap-low" Description="Redis connection for low-priority RDAP messages. Change redis to your Redis container name if different." Type="Variable" Display="advanced" Required="true" Mask="false">redis://redis:6379/messages-rdap-low</Config>
-  <Config Name="Redis RDAP High DSN" Target="MESSENGER_RDAP_HIGH_TRANSPORT_DSN" Default="redis://redis:6379/messages-rdap-high" Description="Redis connection for high-priority RDAP messages. Change redis to your Redis container name if different." Type="Variable" Display="advanced" Required="true" Mask="false">redis://redis:6379/messages-rdap-high</Config>
+  <!-- Redis -->
+  <Config Name="Redis Async DSN" Target="MESSENGER_ASYNC_TRANSPORT_DSN" Default="redis://redis:6379/messages?lazy=1" Description="Redis connection for async messages. Format: redis://CONTAINER_NAME:PORT/messages?lazy=1" Type="Variable" Display="always" Required="true" Mask="false">redis://redis:6379/messages?lazy=1</Config>
+  <Config Name="Redis RDAP Low DSN" Target="MESSENGER_RDAP_LOW_TRANSPORT_DSN" Default="redis://redis:6379/messages-rdap-low?lazy=1" Description="Redis connection for low-priority RDAP messages." Type="Variable" Display="advanced" Required="true" Mask="false">redis://redis:6379/messages-rdap-low?lazy=1</Config>
+  <Config Name="Redis RDAP High DSN" Target="MESSENGER_RDAP_HIGH_TRANSPORT_DSN" Default="redis://redis:6379/messages-rdap-high?lazy=1" Description="Redis connection for high-priority RDAP messages." Type="Variable" Display="advanced" Required="true" Mask="false">redis://redis:6379/messages-rdap-high?lazy=1</Config>
   <Config Name="Redis Lock DSN" Target="LOCK_DSN" Default="redis://redis:6379" Description="Redis connection for distributed locking. Format: redis://CONTAINER_NAME:PORT" Type="Variable" Display="advanced" Required="true" Mask="false">redis://redis:6379</Config>
 
   <!-- Mailer -->
   <Config Name="Mailer DSN" Target="MAILER_DSN" Default="null://null" Description="SMTP connection for email alerts. Example: smtp://user:pass@smtp.example.com:587 — Leave as null://null to disable." Type="Variable" Display="always" Required="false" Mask="false">null://null</Config>
-  <Config Name="Mailer From Address" Target="MAILER_FROM" Default="domainwatchdog@example.com" Description="Sender address for outgoing notification emails." Type="Variable" Display="always" Required="false" Mask="false">domainwatchdog@example.com</Config>
+  <Config Name="Mailer Sender Name" Target="MAILER_SENDER_NAME" Default="Domain Watchdog" Description="Display name for outgoing notification emails." Type="Variable" Display="always" Required="false" Mask="false">Domain Watchdog</Config>
+  <Config Name="Mailer Sender Email" Target="MAILER_SENDER_EMAIL" Default="notifications@example.com" Description="Sender address for outgoing notification emails." Type="Variable" Display="always" Required="false" Mask="false">notifications@example.com</Config>
+
+  <!-- OAuth / SSO (optional) -->
+  <Config Name="OAuth Client ID" Target="OAUTH_CLIENT_ID" Default="" Description="OAuth2/OIDC client ID. Leave blank to disable SSO." Type="Variable" Display="advanced" Required="false" Mask="false"></Config>
+  <Config Name="OAuth Client Secret" Target="OAUTH_CLIENT_SECRET" Default="" Description="OAuth2/OIDC client secret." Type="Variable" Display="advanced" Required="false" Mask="true"></Config>
+  <Config Name="OAuth Authorization URL" Target="OAUTH_AUTHORIZATION_URL" Default="" Description="OAuth2 authorization endpoint URL." Type="Variable" Display="advanced" Required="false" Mask="false"></Config>
+  <Config Name="OAuth Token URL" Target="OAUTH_TOKEN_URL" Default="" Description="OAuth2 token endpoint URL." Type="Variable" Display="advanced" Required="false" Mask="false"></Config>
+  <Config Name="OAuth UserInfo URL" Target="OAUTH_USERINFO_URL" Default="" Description="OAuth2 userinfo endpoint URL." Type="Variable" Display="advanced" Required="false" Mask="false"></Config>
+  <Config Name="OAuth Scope" Target="OAUTH_SCOPE" Default="" Description="OAuth2 scopes to request. Example: openid profile email" Type="Variable" Display="advanced" Required="false" Mask="false"></Config>
+  <Config Name="SSO Auto Redirect" Target="SSO_AUTO_REDIRECT" Default="false" Description="Automatically redirect to SSO login instead of showing the local login form." Type="Variable" Display="advanced" Required="false" Mask="false">false</Config>
 </Container>
