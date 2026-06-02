@@ -24,6 +24,9 @@
   <Config Name="Caddy Config" Target="/config" Default="/mnt/user/appdata/domain-watchdog/caddy/config" Mode="rw" Description="Internal Caddy configuration storage." Type="Path" Display="advanced" Required="true" Mask="false">/mnt/user/appdata/domain-watchdog/caddy/config</Config>
   <Config Name="Public Content" Target="/app/public/content" Default="/mnt/user/appdata/domain-watchdog/public/content" Mode="rw" Description="User-uploaded public content. Create a home.md file here to customize the landing page." Type="Path" Display="advanced" Required="true" Mask="false">/mnt/user/appdata/domain-watchdog/public/content</Config>
 
+  <!-- JWT -->
+  <Config Name="JWT Passphrase" Target="JWT_PASSPHRASE" Default="" Description="Passphrase used to encrypt JWT keypair. Generate with: openssl rand -hex 32 — If changing this on an existing install, regenerate keys with: docker exec domain-watchdog php /app/bin/console lexik:jwt:generate-keypair --overwrite" Type="Variable" Display="always" Required="true" Mask="true"></Config>
+
   <!-- App -->
   <Config Name="App Environment" Target="APP_ENV" Default="prod" Description="Leave as prod." Type="Variable" Display="advanced" Required="true" Mask="false">prod</Config>
   <Config Name="App Secret" Target="APP_SECRET" Default="" Description="Random secret key. Generate with: openssl rand -hex 32" Type="Variable" Display="always" Required="true" Mask="true"></Config>

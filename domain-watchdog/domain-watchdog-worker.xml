@@ -16,6 +16,9 @@
   <Date>2026-06-02</Date>
   <Requires>PostgreSQL container | Redis container | domain-watchdog (app) container | All on the same Docker network</Requires>
 
+  <!-- JWT -->
+  <Config Name="JWT Passphrase" Target="JWT_PASSPHRASE" Default="" Description="Must match the JWT Passphrase set in the domain-watchdog container." Type="Variable" Display="always" Required="true" Mask="true"></Config>
+
   <!-- App -->
   <Config Name="App Environment" Target="APP_ENV" Default="prod" Description="Leave as prod." Type="Variable" Display="advanced" Required="true" Mask="false">prod</Config>
   <Config Name="App Secret" Target="APP_SECRET" Default="" Description="Must match the App Secret set in the domain-watchdog container." Type="Variable" Display="always" Required="true" Mask="true"></Config>
