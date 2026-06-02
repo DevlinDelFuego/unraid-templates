@@ -8,43 +8,38 @@
   <Privileged>false</Privileged>
   <Support>https://github.com/maelgangloff/domain-watchdog/issues</Support>
   <Project>https://github.com/maelgangloff/domain-watchdog</Project>
-  <Overview>Domain Watchdog monitors domain lifecycle via RDAP, sends alerts when domains change status, and can automatically attempt registration when a domain drops. Requires an existing PostgreSQL and Redis container on the same Docker network. Deploy domain-watchdog-worker alongside this container.</Overview>
+  <Overview>Domain Watchdog monitors domain lifecycle via RDAP, sends alerts when domains change status, and can automatically attempt registration when a domain drops.[br][br]Requires an existing PostgreSQL and Redis container on the same Docker network.[br][br]Also deploy the domain-watchdog-worker container from this repo.[br][br]Before starting: create the database in your PostgreSQL container:[br]docker exec -it YOUR_POSTGRES_CONTAINER psql -U YOUR_USER -c "CREATE DATABASE domainwatchdog;"</Overview>
   <Category>Network: Tools: Status:</Category>
   <WebUI>http://[IP]:[PORT:80]/</WebUI>
   <Icon>https://raw.githubusercontent.com/maelgangloff/domain-watchdog/master/assets/logo.png</Icon>
   <ExtraParams>--restart=unless-stopped</ExtraParams>
-  <Date>2025-01-01</Date>
-  <Changes></Changes>
-  <Requires>PostgreSQL container | Redis container | Both must be on the same Docker network as this container | Also deploy domain-watchdog-worker</Requires>
+  <Date>2026-06-02</Date>
+  <Requires>PostgreSQL container | Redis container | Both on the same Docker network | Also install domain-watchdog-worker</Requires>
 
-  <!-- Web UI Port -->
+  <!-- Port -->
   <Config Name="Web UI Port" Target="80" Default="8080" Mode="tcp" Description="Port to access the Domain Watchdog web interface." Type="Port" Display="always" Required="true" Mask="false">8080</Config>
 
   <!-- Volumes -->
-  <Config Name="Caddy Data" Target="/data" Default="/mnt/user/appdata/domain-watchdog/caddy/data" Mode="rw" Description="Caddy TLS certificate and state storage." Type="Path" Display="advanced" Required="true" Mask="false">/mnt/user/appdata/domain-watchdog/caddy/data</Config>
-  <Config Name="Caddy Config" Target="/config" Default="/mnt/user/appdata/domain-watchdog/caddy/config" Mode="rw" Description="Caddy configuration storage." Type="Path" Display="advanced" Required="true" Mask="false">/mnt/user/appdata/domain-watchdog/caddy/config</Config>
+  <Config Name="Caddy Data" Target="/data" Default="/mnt/user/appdata/domain-watchdog/caddy/data" Mode="rw" Description="Internal Caddy state storage." Type="Path" Display="advanced" Required="true" Mask="false">/mnt/user/appdata/domain-watchdog/caddy/data</Config>
+  <Config Name="Caddy Config" Target="/config" Default="/mnt/user/appdata/domain-watchdog/caddy/config" Mode="rw" Description="Internal Caddy configuration storage." Type="Path" Display="advanced" Required="true" Mask="false">/mnt/user/appdata/domain-watchdog/caddy/config</Config>
   <Config Name="Public Content" Target="/app/public/content" Default="/mnt/user/appdata/domain-watchdog/public/content" Mode="rw" Description="User-uploaded public content." Type="Path" Display="advanced" Required="true" Mask="false">/mnt/user/appdata/domain-watchdog/public/content</Config>
 
   <!-- App -->
-  <Config Name="App Environment" Target="APP_ENV" Default="prod" Description="Application environment. Leave as prod." Type="Variable" Display="advanced" Required="true" Mask="false">prod</Config>
-  <Config Name="App Secret" Target="APP_SECRET" Default="" Description="Random secret key. Generate with: openssl rand -hex 32" Type="Variable" Display="always" Required="true" Mask="true"></Config>
-  <Config Name="Secure Cookies" Target="HTTP_SECURE_COOKIE" Default="true" Description="Set to true if behind a reverse proxy with SSL. Set to false for plain HTTP access." Type="Variable" Display="always" Required="true" Mask="false">true</Config>
-  <Config Name="Server Name" Target="SERVER_NAME" Default=":80" Description="Internal Caddy server binding. Leave as :80 unless you know what you are doing." Type="Variable" Display="advanced" Required="true" Mask="false">:80</Config>
+  <Config Name="App Environment" Target="APP_ENV" Default="prod" Description="Leave as prod." Type="Variable" Display="advanced" Required="true" Mask="false">prod</Config>
+  <Config Name="App Secret" Target="APP_SECRET" Default="" Description="Random secret key. Generate one with: openssl rand -hex 32" Type="Variable" Display="always" Required="true" Mask="true"></Config>
+  <Config Name="Secure Cookies" Target="HTTP_SECURE_COOKIE" Default="true" Description="Set to true if behind a reverse proxy with SSL (recommended). Set to false for plain HTTP direct access." Type="Variable" Display="always" Required="true" Mask="false">true</Config>
+  <Config Name="Server Name" Target="SERVER_NAME" Default=":80" Description="Internal Caddy binding. Leave as :80." Type="Variable" Display="advanced" Required="true" Mask="false">:80</Config>
 
-  <!-- Database -->
-  <Config Name="PostgreSQL Container Name" Target="POSTGRES_HOST" Default="postgresql" Description="Container name of your existing PostgreSQL instance. Must be on the same Docker network." Type="Variable" Display="always" Required="true" Mask="false">postgresql</Config>
-  <Config Name="PostgreSQL Port" Target="POSTGRES_PORT" Default="5432" Description="Port your PostgreSQL container listens on." Type="Variable" Display="advanced" Required="true" Mask="false">5432</Config>
-  <Config Name="PostgreSQL Database" Target="POSTGRES_DB" Default="domainwatchdog" Description="Database name for Domain Watchdog. Create it first: docker exec -it postgresql psql -U app -c &quot;CREATE DATABASE domainwatchdog;&quot;" Type="Variable" Display="always" Required="true" Mask="false">domainwatchdog</Config>
-  <Config Name="PostgreSQL User" Target="POSTGRES_USER" Default="app" Description="PostgreSQL username." Type="Variable" Display="always" Required="true" Mask="false">app</Config>
-  <Config Name="PostgreSQL Password" Target="POSTGRES_PASSWORD" Default="" Description="PostgreSQL password for the above user." Type="Variable" Display="always" Required="true" Mask="true"></Config>
-  <Config Name="PostgreSQL Version" Target="POSTGRES_VERSION" Default="16" Description="PostgreSQL server version. Match your existing container." Type="Variable" Display="advanced" Required="true" Mask="false">16</Config>
-  <Config Name="PostgreSQL Charset" Target="POSTGRES_CHARSET" Default="utf8" Description="Database character set. Leave as utf8." Type="Variable" Display="advanced" Required="false" Mask="false">utf8</Config>
+  <!-- Database - full DSN -->
+  <Config Name="Database URL" Target="DATABASE_URL" Default="postgresql://app:password@postgresql:5432/domainwatchdog?serverVersion=16&amp;charset=utf8" Description="Full PostgreSQL connection string. Format: postgresql://USER:PASSWORD@CONTAINER_NAME:PORT/DATABASE?serverVersion=VERSION&amp;charset=utf8" Type="Variable" Display="always" Required="true" Mask="false">postgresql://app:password@postgresql:5432/domainwatchdog?serverVersion=16&amp;charset=utf8</Config>
 
-  <!-- Redis -->
-  <Config Name="Redis Container Name" Target="REDIS_HOST" Default="redis" Description="Container name of your existing Redis instance. Must be on the same Docker network." Type="Variable" Display="always" Required="true" Mask="false">redis</Config>
-  <Config Name="Redis Port" Target="REDIS_PORT" Default="6379" Description="Port your Redis container listens on." Type="Variable" Display="advanced" Required="true" Mask="false">6379</Config>
+  <!-- Redis - full DSNs -->
+  <Config Name="Redis Async DSN" Target="MESSENGER_ASYNC_TRANSPORT_DSN" Default="redis://redis:6379/messages" Description="Redis connection for async messages. Format: redis://CONTAINER_NAME:PORT/messages" Type="Variable" Display="always" Required="true" Mask="false">redis://redis:6379/messages</Config>
+  <Config Name="Redis RDAP Low DSN" Target="MESSENGER_RDAP_LOW_TRANSPORT_DSN" Default="redis://redis:6379/messages-rdap-low" Description="Redis connection for low-priority RDAP messages. Change redis to your Redis container name if different." Type="Variable" Display="advanced" Required="true" Mask="false">redis://redis:6379/messages-rdap-low</Config>
+  <Config Name="Redis RDAP High DSN" Target="MESSENGER_RDAP_HIGH_TRANSPORT_DSN" Default="redis://redis:6379/messages-rdap-high" Description="Redis connection for high-priority RDAP messages. Change redis to your Redis container name if different." Type="Variable" Display="advanced" Required="true" Mask="false">redis://redis:6379/messages-rdap-high</Config>
+  <Config Name="Redis Lock DSN" Target="LOCK_DSN" Default="redis://redis:6379" Description="Redis connection for distributed locking. Format: redis://CONTAINER_NAME:PORT" Type="Variable" Display="advanced" Required="true" Mask="false">redis://redis:6379</Config>
 
   <!-- Mailer -->
-  <Config Name="Mailer DSN" Target="MAILER_DSN" Default="null://null" Description="SMTP connection string for email alerts. Example: smtp://user:pass@smtp.example.com:587 — Leave as null://null to disable email." Type="Variable" Display="always" Required="false" Mask="false">null://null</Config>
-  <Config Name="Mailer From Address" Target="MAILER_FROM" Default="domainwatchdog@example.com" Description="Sender email address for outgoing notifications." Type="Variable" Display="always" Required="false" Mask="false">domainwatchdog@example.com</Config>
+  <Config Name="Mailer DSN" Target="MAILER_DSN" Default="null://null" Description="SMTP connection for email alerts. Example: smtp://user:pass@smtp.example.com:587 — Leave as null://null to disable." Type="Variable" Display="always" Required="false" Mask="false">null://null</Config>
+  <Config Name="Mailer From Address" Target="MAILER_FROM" Default="domainwatchdog@example.com" Description="Sender address for outgoing notification emails." Type="Variable" Display="always" Required="false" Mask="false">domainwatchdog@example.com</Config>
 </Container>
