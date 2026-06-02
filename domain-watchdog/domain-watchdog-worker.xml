@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Container version="2">
+  <Name>domain-watchdog-worker</Name>
+  <Repository>maelgangloff/domain-watchdog:latest</Repository>
+  <Registry>https://hub.docker.com/r/maelgangloff/domain-watchdog</Registry>
+  <Network>bridge</Network>
+  <Shell>sh</Shell>
+  <Privileged>false</Privileged>
+  <Support>https://github.com/maelgangloff/domain-watchdog/issues</Support>
+  <Project>https://github.com/maelgangloff/domain-watchdog</Project>
+  <Overview>Background worker for Domain Watchdog. Processes RDAP lookups, domain registration attempts, and async tasks from the queue. Must be deployed alongside the domain-watchdog container and share the same PostgreSQL, Redis, and Docker network settings.</Overview>
+  <Category>Network: Tools: Status:</Category>
+  <Icon>https://raw.githubusercontent.com/maelgangloff/domain-watchdog/master/assets/logo.png</Icon>
+  <ExtraParams>--restart=always --no-healthcheck</ExtraParams>
+  <PostArgs>php /app/bin/console messenger:consume --all --time-limit=3600 -vvv</PostArgs>
+  <Date>2025-01-01</Date>
+  <Changes></Changes>
+  <Requires>PostgreSQL container | Redis container | domain-watchdog (app) container | All must be on the same Docker network</Requires>
+
+  <!-- App -->
+  <Config Name="App Environment" Target="APP_ENV" Default="prod" Description="Application environment. Leave as prod." Type="Variable" Display="advanced" Required="true" Mask="false">prod</Config>
+  <Config Name="App Secret" Target="APP_SECRET" Default="" Description="Must match the App Secret set in the domain-watchdog container." Type="Variable" Display="always" Required="true" Mask="true"></Config>
+  <Config Name="Worker Consumer Name" Target="MESSENGER_CONSUMER_NAME" Default="worker" Description="Internal messenger consumer identifier. Leave as worker." Type="Variable" Display="advanced" Required="true" Mask="false">worker</Config>
+
+  <!-- Database -->
+  <Config Name="PostgreSQL Container Name" Target="POSTGRES_HOST" Default="postgresql" Description="Container name of your existing PostgreSQL instance. Must match domain-watchdog container setting." Type="Variable" Display="always" Required="true" Mask="false">postgresql</Config>
+  <Config Name="PostgreSQL Port" Target="POSTGRES_PORT" Default="5432" Description="Port your PostgreSQL container listens on." Type="Variable" Display="advanced" Required="true" Mask="false">5432</Config>
+  <Config Name="PostgreSQL Database" Target="POSTGRES_DB" Default="domainwatchdog" Description="Must match the database name set in the domain-watchdog container." Type="Variable" Display="always" Required="true" Mask="false">domainwatchdog</Config>
+  <Config Name="PostgreSQL User" Target="POSTGRES_USER" Default="app" Description="Must match the PostgreSQL user set in the domain-watchdog container." Type="Variable" Display="always" Required="true" Mask="false">app</Config>
+  <Config Name="PostgreSQL Password" Target="POSTGRES_PASSWORD" Default="" Description="Must match the PostgreSQL password set in the domain-watchdog container." Type="Variable" Display="always" Required="true" Mask="true"></Config>
+  <Config Name="PostgreSQL Version" Target="POSTGRES_VERSION" Default="16" Description="PostgreSQL server version. Match your existing container." Type="Variable" Display="advanced" Required="true" Mask="false">16</Config>
+  <Config Name="PostgreSQL Charset" Target="POSTGRES_CHARSET" Default="utf8" Description="Leave as utf8." Type="Variable" Display="advanced" Required="false" Mask="false">utf8</Config>
+
+  <!-- Redis -->
+  <Config Name="Redis Container Name" Target="REDIS_HOST" Default="redis" Description="Container name of your existing Redis instance. Must match domain-watchdog container setting." Type="Variable" Display="always" Required="true" Mask="false">redis</Config>
+  <Config Name="Redis Port" Target="REDIS_PORT" Default="6379" Description="Port your Redis container listens on." Type="Variable" Display="advanced" Required="true" Mask="false">6379</Config>
+</Container>
