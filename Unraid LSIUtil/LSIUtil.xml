@@ -30,7 +30,7 @@
     [b]Credit:[/b] Built on the lsiutil binary maintained by Thomas Lovell
     (https://github.com/thomaslovell/LSIUtil/).
   </Description>
-  <Icon>https://raw.githubusercontent.com/DevlinDelFuego/Unraid-LSIUtil/main/icon.png</Icon>
+  <Icon>https://raw.githubusercontent.com/DevlinDelFuego/Unraid-LSIUtil/main/icon.svg</Icon>
   <pluginURL>https://raw.githubusercontent.com/DevlinDelFuego/Unraid-LSIUtil/main/lsiutil.plg</pluginURL>
   <MinVer>6.12</MinVer>
   <Support>https://github.com/DevlinDelFuego/Unraid-LSIUtil/issues</Support>
