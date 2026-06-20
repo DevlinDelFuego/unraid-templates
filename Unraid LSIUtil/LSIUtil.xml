@@ -3,7 +3,7 @@
   <Name>LSIUtil</Name>
   <Author>DevlinDelFuego</Author>
   <Registry>https://github.com/DevlinDelFuego/Unraid-LSIUtil/releases</Registry>
-  <Category>Tools:Plugins</Category>
+  <Category>Plugins:</Category>
   <Overview>
     Monitor LSI SAS Host Bus Adapters (9207-8i, SAS2308 family) directly from Unraid.
     Displays real-time HBA temperature with configurable alert threshold, PCIe link info,
