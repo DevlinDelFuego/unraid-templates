@@ -31,7 +31,7 @@
     (https://github.com/thomaslovell/LSIUtil/).
   </Description>
   <Icon>https://raw.githubusercontent.com/DevlinDelFuego/Unraid-LSIUtil/main/icon.svg</Icon>
-  <pluginURL>https://raw.githubusercontent.com/DevlinDelFuego/Unraid-LSIUtil/main/lsiutil.plg</pluginURL>
+  <PluginURL>https://raw.githubusercontent.com/DevlinDelFuego/Unraid-LSIUtil/main/lsiutil.plg</PluginURL>
   <MinVer>6.12</MinVer>
   <Support>https://github.com/DevlinDelFuego/Unraid-LSIUtil/issues</Support>
   <Project>https://github.com/DevlinDelFuego/Unraid-LSIUtil</Project>
