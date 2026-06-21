@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Maintainer>
+  <Icon>https://avatars.githubusercontent.com/DevlinDelFuego</Icon>
+  <Profile>
+    Creating Unraid plugins and templates focused on hardware monitoring and self-hosted tools.
+    Current projects include LSIUtil - an HBA temperature and health monitor for LSI SAS controllers.
+  </Profile>
+</Maintainer>
