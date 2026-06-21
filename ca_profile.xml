@@ -5,4 +5,6 @@
     Creating Unraid plugins and templates focused on hardware monitoring and self-hosted tools.
     Current projects include LSIUtil - an HBA temperature and health monitor for LSI SAS controllers.
   </Profile>
+  <DonateLink>https://ko-fi.com/devlindelfuego</DonateLink>
+  <DonateText>If you find my plugins useful, consider buying me a coffee on Ko-fi.</DonateText>
 </Maintainer>
