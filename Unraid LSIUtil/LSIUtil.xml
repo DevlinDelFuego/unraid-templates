@@ -19,4 +19,5 @@ using the mpt2sas / mpt3sas kernel driver.
   <Support>https://github.com/DevlinDelFuego/Unraid-LSIUtil/issues</Support>
   <Icon>https://raw.githubusercontent.com/DevlinDelFuego/Unraid-LSIUtil/main/icon.png</Icon>
   <Project>https://github.com/DevlinDelFuego/Unraid-LSIUtil</Project>
+  <Registry>https://github.com/DevlinDelFuego/Unraid-LSIUtil</Registry>
 </Containers>
