@@ -6,6 +6,7 @@
   <Beta>False</Beta>
   <Category>Tools:Utilities</Category>
   <Name>Unraid-LSIUtil</Name>
+  <CA>AddOn</CA>
   <Description>
 Monitor LSI SAS Host Bus Adapters (9207-8i, SAS2308 and similar) directly from Unraid.
 Displays real-time HBA temperature with configurable alert threshold and Unraid notification,
