@@ -9,7 +9,7 @@
   <Support>https://github.com/maelgangloff/domain-watchdog/issues</Support>
   <Project>https://github.com/maelgangloff/domain-watchdog</Project>
   <Overview>Background worker for Domain Watchdog. Processes RDAP lookups, domain drop attempts, and async queue tasks.[br][br]Must be deployed alongside the domain-watchdog container. All connection strings must match exactly.</Overview>
-  <Category>Network: Tools: Status:</Category>
+  <Category>Network: Tools:</Category>
   <Icon>https://raw.githubusercontent.com/maelgangloff/domain-watchdog/master/assets/logo.png</Icon>
   <ExtraParams>--restart=always --no-healthcheck</ExtraParams>
   <PostArgs>php /app/bin/console messenger:consume --all --time-limit=3600 -vvv</PostArgs>
