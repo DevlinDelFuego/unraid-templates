@@ -1,23 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Containers>
-  <Plugin>True</Plugin>
+<Plugin>
   <Name>Unraid-LSIUtil</Name>
   <PluginURL>https://raw.githubusercontent.com/DevlinDelFuego/Unraid-LSIUtil/main/lsiutil.plg</PluginURL>
-  <PluginAuthor>DevlinDelFuego</PluginAuthor>
-  <Beta>False</Beta>
-  <Description>
-Monitor LSI SAS Host Bus Adapters (9207-8i, SAS2308 and similar) directly from Unraid.
+  <Support>https://forums.unraid.net/topic/195220-support-devlindelfuego-all-images-and-files</Support>
+  <Project>https://github.com/DevlinDelFuego/Unraid-LSIUtil</Project>
+  <Overview>Monitor LSI SAS Host Bus Adapters (9207-8i, SAS2308 and similar) directly from Unraid.
 Displays real-time HBA temperature with configurable alert threshold and Unraid notification,
 PCIe link info, per-PHY SAS health counters, attached drive list with SAS addresses and OS
 device names, HBA firmware event log, and an at-a-glance dashboard tile (Unraid 7.2+).
 The lsiutil binary is bundled - nothing is downloaded after the initial install.
 Supported hardware: LSI 9207-8i, 9211-8i, 9205-8i, 9201-16i and other SAS2x08-family cards
-using the mpt2sas / mpt3sas kernel driver.
-  </Description>
+using the mpt2sas / mpt3sas kernel driver.</Overview>
   <Icon>https://raw.githubusercontent.com/DevlinDelFuego/Unraid-LSIUtil/main/icon.png</Icon>
-  <Category>Tools:Utilities:</Category>
-  <Support>https://forums.unraid.net/topic/195220-support-devlindelfuego-all-images-and-files</Support>
-  <Project>https://github.com/DevlinDelFuego/Unraid-LSIUtil</Project>
-  <Registry>https://github.com/DevlinDelFuego/Unraid-LSIUtil</Registry>
-  <MinVer>6.9.0</MinVer>
-</Containers>
+  <Category>Tools:Utilities</Category>
+</Plugin>
