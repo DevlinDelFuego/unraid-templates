@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Container version="2">
+<Containers>
   <Plugin>True</Plugin>
   <Name>Unraid-LSIUtil</Name>
   <PluginURL>https://raw.githubusercontent.com/DevlinDelFuego/Unraid-LSIUtil/main/lsiutil.plg</PluginURL>
   <PluginAuthor>DevlinDelFuego</PluginAuthor>
+  <Beta>False</Beta>
   <Description>
 Monitor LSI SAS Host Bus Adapters (9207-8i, SAS2308 and similar) directly from Unraid.
 Displays real-time HBA temperature with configurable alert threshold and Unraid notification,
@@ -15,8 +16,8 @@ using the mpt2sas / mpt3sas kernel driver.
   </Description>
   <Icon>https://raw.githubusercontent.com/DevlinDelFuego/Unraid-LSIUtil/main/icon.png</Icon>
   <Category>Tools:Utilities:</Category>
-  <Support>https://github.com/DevlinDelFuego/Unraid-LSIUtil/issues</Support>
+  <Support>https://forums.unraid.net/topic/195220-support-devlindelfuego-all-images-and-files</Support>
   <Project>https://github.com/DevlinDelFuego/Unraid-LSIUtil</Project>
   <Registry>https://github.com/DevlinDelFuego/Unraid-LSIUtil</Registry>
   <MinVer>6.9.0</MinVer>
-</Container>
+</Containers>
