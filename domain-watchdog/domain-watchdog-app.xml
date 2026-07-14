@@ -11,7 +11,7 @@
   <Overview>Domain Watchdog monitors domain names using RDAP, tracks their history, and helps you acquire them when they expire.[br][br]Requires an existing PostgreSQL and Redis container on the same Docker network.[br][br]Also deploy the domain-watchdog-worker container.[br][br]Before starting, create the database:[br]docker exec -it YOUR_POSTGRES_CONTAINER psql -U YOUR_USER -c "CREATE DATABASE domainwatchdog;"</Overview>
   <Category>Network: Tools:</Category>
   <WebUI>http://[IP]:[PORT:80]/</WebUI>
-  <Icon>https://raw.githubusercontent.com/maelgangloff/domain-watchdog/master/assets/logo.png</Icon>
+  <Icon>https://cdn.jsdelivr.net/gh/selfhst/icons/png/domain-watchdog.png</Icon>
   <ExtraParams>--restart=unless-stopped</ExtraParams>
   <Date>2026-06-02</Date>
   <Requires>PostgreSQL container | Redis container | Both on the same Docker network | Also install domain-watchdog-worker</Requires>
