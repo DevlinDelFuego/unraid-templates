@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Plugin>True</Plugin>
+<Plugin>
 <PluginURL>https://raw.githubusercontent.com/DevlinDelFuego/Unraid-LSIUtil/main/lsiutil.plg</PluginURL>
 <PluginAuthor>DevlinDelFuego</PluginAuthor>
 <Category>Tools:Utilities</Category>
@@ -17,3 +17,4 @@ using the mpt2sas / mpt3sas kernel driver.
 <Support>https://github.com/DevlinDelFuego/Unraid-LSIUtil/issues</Support>
 <Icon>https://raw.githubusercontent.com/DevlinDelFuego/Unraid-LSIUtil/main/icon.png</Icon>
 <Project>https://github.com/DevlinDelFuego/Unraid-LSIUtil</Project>
+</Plugin>
