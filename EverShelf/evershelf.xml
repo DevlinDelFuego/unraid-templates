@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>EverShelf</Name>
+  <Repository>ghcr.io/dadaloop82/evershelf:latest</Repository>
+  <Registry/>
+  <Network>Bridge</Network>
+  <Privileged>false</Privileged>
+  <Support>https://github.com/dadaloop82/EverShelf/issues</Support>
+  <Project>https://github.com/dadaloop82/EverShelf</Project>
+  <ReadMe/>
+  <Overview>EverShelf: Your pantry's best friend. A self-hosted, open source smart pantry manager with AI expiry tracking, barcode scanning, smart shopping lists, and Android Kiosk support.&#13;
+&#13;
+Connects to OpenFoodFacts for product data (millions of items). Features include camera-based barcode reading, nutrition tracking, allergen information, and offline support for kitchen devices.&#13;
+&#13;
+For full features (barcode scanning, expiry reading, AI recipe suggestions), you'll need to configure environment variables in the .env file:&#13;
+- GEMINI_API_KEY: Get free API key at https://aistudio.google.com/app/apikey for AI features&#13;
+- Optional TTS_URL/TTS_TOKEN for Home Assistant voice readout&#13;
+</Overview>
+  <Category>Productivity:</Category>
+  <WebUI>http://[IP]:[PORT:80]</WebUI>
+  <TemplateURL/>
+  <Icon>https://raw.githubusercontent.com/dadaloop82/EverShelf/main/assets/img/logo/logo_icon_512.png</Icon>
+  <ExtraParams/>
+  <PostArgs/>
+  <Requires/>
+  <Config Name="Port" Target="80" Default="80" Mode="tcp" Description="WebUI port for EverShelf" Type="Port" Display="always" Required="true" Mask="false">80</Config>
+  <Config Name="Data" Target="/data" Default="/mnt/user/appdata/evershelf" Mode="rw" Description="EverShelf data directory" Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/evershelf</Config>
+  <TailscaleStateDir/>
+</Container>
