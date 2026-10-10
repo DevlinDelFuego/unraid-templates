@@ -24,6 +24,6 @@ For full features (barcode scanning, expiry reading, AI recipe suggestions), you
   <PostArgs/>
   <Requires/>
   <Config Name="Port" Target="80" Default="80" Mode="tcp" Description="WebUI port for EverShelf" Type="Port" Display="always" Required="true" Mask="false">80</Config>
-  <Config Name="Data" Target="/data" Default="/mnt/user/appdata/evershelf" Mode="rw" Description="EverShelf data directory" Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/evershelf</Config>
+  <Config Name="Data" Target="/var/www/html/.env" Default="/mnt/user/appdata/evershelf/.env" Mode="rw" Description="EverShelf data directory" Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/evershelf/.env</Config>
   <TailscaleStateDir/>
 </Container>
