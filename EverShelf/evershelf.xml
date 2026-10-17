@@ -23,10 +23,10 @@ For full features (barcode scanning, expiry reading, AI recipe suggestions), you
   <ExtraParams/>
   <PostArgs/>
   <Requires/>
-  <Config Name="Web UI" Target="80" Default="8080" Mode="tcp" Description="Port of the web interface (the container listens on 80)." Type="Port" Display="always" Required="true" Mask="false">8092</Config>
+  <Config Name="Web UI" Target="80" Default="8080" Mode="tcp" Description="Port of the web interface (the container listens on 80)." Type="Port" Display="always" Required="true" Mask="false">8080</Config>
   <Config Name="App data" Target="/var/www/html/data" Default="/mnt/user/appdata/evershelf/data" Mode="rw" Description="SQLite database, caches and logs &#x2014; this is the pantry. Never put it on a tmpfs: an update would start empty." Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/evershelf/data</Config>
   <Config Name="Configuration" Target="/config" Default="/mnt/user/appdata/evershelf" Mode="rw" Description="Folder holding .env (created from the example on first start, writable by the app)." Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/evershelf</Config>
-  <Config Name="Configuration file" Target="EVERSHELF_ENV_FILE" Default="/config/.env" Mode="" Description="Where the app reads and writes .env inside the container." Type="Variable" Display="always" Required="false" Mask="false">/config/.env</Config>
   <Config Name="Timezone" Target="TZ" Default="America/New_York" Mode="" Description="Timezone for expiry dates, logs and cron." Type="Variable" Display="always" Required="false" Mask="false">America/New_York</Config>
+  <Config Name="Configuration file" Target="EVERSHELF_ENV_FILE" Default="/config/.env" Mode="" Description="Where the app reads and writes .env inside the container." Type="Variable" Display="advanced" Required="false" Mask="false">/config/.env</Config>
   <TailscaleStateDir/>
 </Container>
