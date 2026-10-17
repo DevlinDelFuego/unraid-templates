@@ -23,7 +23,10 @@ For full features (barcode scanning, expiry reading, AI recipe suggestions), you
   <ExtraParams/>
   <PostArgs/>
   <Requires/>
-  <Config Name="Port" Target="80" Default="80" Mode="tcp" Description="WebUI port for EverShelf" Type="Port" Display="always" Required="true" Mask="false">80</Config>
-  <Config Name="Data" Target="/var/www/html/.env" Default="/mnt/user/appdata/evershelf/.env" Mode="rw" Description="EverShelf data directory" Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/evershelf/.env</Config>
+  <Config Name="Web UI" Target="80" Default="8080" Mode="tcp" Description="Port of the web interface (the container listens on 80)." Type="Port" Display="always" Required="true" Mask="false">8080</Config>
+  <Config Name="App data" Target="/var/www/html/data" Default="/mnt/user/appdata/evershelf/data" Mode="rw" Description="SQLite database, caches and logs — this is the pantry. Never put it on a tmpfs: an update would start empty." Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/evershelf/data</Config>
+  <Config Name="Configuration" Target="/config" Default="/mnt/user/appdata/evershelf" Mode="rw" Description="Folder holding .env (created from the example on first start, writable by the app)." Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/evershelf</Config>
+  <Config Name="Configuration file" Target="EVERSHELF_ENV_FILE" Description="Where the app reads and writes .env inside the container." Type="Variable" Display="always" Required="true" Mask="false">/config/.env</Config>
+  <Config Name="Timezone" Target="TZ" Description="Timezone for expiry dates, logs and cron." Type="Variable" Display="always" Required="false" Mask="false">Europe/Rome</Config>
   <TailscaleStateDir/>
 </Container>
