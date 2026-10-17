@@ -8,14 +8,15 @@
   <Support>https://github.com/dadaloop82/EverShelf/issues</Support>
   <Project>https://github.com/dadaloop82/EverShelf</Project>
   <ReadMe/>
-  <Overview>EverShelf: Your pantry's best friend. A self-hosted, open source smart pantry manager with AI expiry tracking, barcode scanning, smart shopping lists, and Android Kiosk support.&#13;
+  <Overview>Self-hosted pantry manager: AI expiry tracking, barcode scanning, smart shopping lists and an Android kiosk for the kitchen wall.&#13;
 &#13;
-Connects to OpenFoodFacts for product data (millions of items). Features include camera-based barcode reading, nutrition tracking, allergen information, and offline support for kitchen devices.&#13;
+Free, open source, no account and no advertising. Product data comes from OpenFoodFacts (millions of items); the AI features need a free Gemini key (see docs).&#13;
 &#13;
-For full features (barcode scanning, expiry reading, AI recipe suggestions), you'll need to configure environment variables in the .env file:&#13;
-- GEMINI_API_KEY: Get free API key at https://aistudio.google.com/app/apikey for AI features&#13;
-- Optional TTS_URL/TTS_TOKEN for Home Assistant voice readout&#13;
-</Overview>
+First start: open the Web UI and pair the device with the one-time code printed in the container log:
+docker logs evershelf 2&amp;1 | grep -i "pairing code" | tail -1&#13;
+&#13;
+Keep both paths on the array: "App data" holds the database, "Configuration" holds .env.
+  </Overview>
   <Category>Productivity:</Category>
   <WebUI>http://[IP]:[PORT:80]</WebUI>
   <TemplateURL/>
